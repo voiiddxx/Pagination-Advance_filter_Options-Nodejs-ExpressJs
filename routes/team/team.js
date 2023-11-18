@@ -26,6 +26,21 @@ teamRouter.post("/api/team" , async (req , res)=>{
 });
 
 
+//   API FOR GETTING ALL TEAM'
+
+    teamRouter.get("/api/team" , async(req , res)=>{
+        try {
+            let team = await Team.find({});
+            if(!team){
+                return res.status(401).json({message:"No Team found"});
+            }
+            
+            res.json(team);
+        } catch (error) {
+            return res.status(500).json({error:error.message});
+        }
+    })
+
 //  API FOR FETCHING TEAM BY ID
 
 teamRouter.get("/api/team/:id" , async(req , res)=>{
@@ -41,6 +56,7 @@ teamRouter.get("/api/team/:id" , async(req , res)=>{
         return res.status(500).json({error:error.message});
     }
 })
+
 
 
 
