@@ -8,7 +8,7 @@ const getUserRouter = express.Router();
 getUserRouter.get("/api/user" , async(req , res)=>{
     try {
         const page = req.query.page;
-        const limit =2;
+        const limit =5;
         const startIndex = (page-1)*limit;
         const endIndex = page*limit;
         let user = await User.find({});
@@ -45,10 +45,12 @@ getUserRouter.get("/api/users/:id" , async(req , res)=>{
 // GET USER BASED ON FILTER API
 
 getUserRouter.get("/api/users" , async(req,res)=>{
+
     try {
         const {domain , available , gender } = req.query;
         let queryObject = {};
         if(domain){
+
             queryObject.domain = domain;
         }
         if(available){
@@ -57,12 +59,18 @@ getUserRouter.get("/api/users" , async(req,res)=>{
         if(gender){
             queryObject.gender = gender;
         }
+
+
         
 
         let user = await User.find(queryObject);
+
         let page = req.query.page;
-        const limit = 2;
+
+        const limit = 5;
+
         const Start = (page-1)*limit;
+
         const lastIndex = page*limit;
         
         user = user.slice(Start , lastIndex);
