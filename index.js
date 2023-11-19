@@ -6,6 +6,7 @@ const deleteuserRouter = require("./routes/deleteUser/deleteUser");
 const updateUserRouter = require("./routes/updateUser/updateUser");
 const teamRouter = require("./routes/team/team");
 require("dotenv").config();
+const cors = require("cors");
 
 
 // INITIALIZING THE APP
@@ -21,6 +22,8 @@ mongoose.connect(process.env.DATABASE).then(()=>{
 
 // MIDDLEWARES
 app.use(express.json());
+app.use(cors());
+
 
 
 // ROUTES CONTROLLERS
