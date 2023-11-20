@@ -83,7 +83,8 @@ getUserRouter.get("/api/users" , async(req,res)=>{
 //  IMPLEMENTED SEARCH USING NAME OF THE USERS
 getUserRouter.get("/api/user/search" , async(req , res)=>{
     try {
-        const {first_name } = req.query;
+        const {first_name} = req.query;
+        
 
         console.log(first_name);
         let querySearchObject = {};
@@ -95,6 +96,16 @@ getUserRouter.get("/api/user/search" , async(req , res)=>{
         if(!user){
             return res.status(400).json({message:"There is some problem occured"});
         }
+        let page = req.query.page;
+        
+        const limit = 5;
+
+        const Start = (page-1)*limit;
+
+        const lastIndex = page*limit;
+        
+        user = user.slice(Start , lastIndex);
+        
         res.json(user);
     } catch (error) {
         return res.status(500).json({error:error.message});
