@@ -11,7 +11,10 @@ const teamSchema = mongoose.Schema({
     team_member:
     [
         {
-            user:userSchema
+            type:mongoose.Schema.ObjectId,
+            ref:'User',
+            sparse:true
+            
         }
     ],
 });
